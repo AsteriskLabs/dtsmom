@@ -13,7 +13,7 @@ group :production do
 end
 gem 'thin'
 gem 'devise'
-gem 'devise_google_authenticator', '0.3.2'
+gem 'devise_google_authenticator', '0.3.3'
 
 
 # Gems used only for assets and not required
