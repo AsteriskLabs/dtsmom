@@ -1,20 +1,28 @@
-Hi <%= current_admin.email %><br />
-<%= link_to('Logout', :destroy_admin_session, :method => :delete) %><br /><br />
+<%= render "unibar" %>
 
-Clients:<br />
-<% @clients.each do |client| %>
-<%= link_to(client.email, :controller => :dtsadmin, :action => :listclient, :id => client.id) %> (<%= @clientcounts[client.id] %>)<br />
-<% end %>
 
-<br />Add a new client:<br />
-<%= form_tag(:dtsadmin_addclient) do -%>
-<%= text_field_tag 'email' %><br />
-<%= password_field_tag 'password' %><br />
-<%= password_field_tag 'password_confirmation' %><br />
-<%= submit_tag 'Add Client' %>
-<% end -%><br />
+<div class="ast-main-content">
+	<div class="limiter">
+		<h1 class="ast-title">Clients:</h1>
+		<p class="ast-text">
+			<% @clients.each do |client| %>
+			<%= link_to(client.email, :controller => :dtsadmin, :action => :listclient, :id => client.id) %> (<%= @clientcounts[client.id] %>)<br />
+			<% end %>
 
-Admins:<br />
-<% @admins.each do |admin| %>
-<%= admin.email %><br />
-<% end %>
+			<br />Add a new client:<br />
+			<%= form_tag(:dtsadmin_addclient) do -%>
+			Email: <%= text_field_tag 'email' %><br />
+			Password: <%= password_field_tag 'password' %><br />
+			Confirm Password: <%= password_field_tag 'password_confirmation' %><br />
+			<%= submit_tag 'Add Client' %>
+			<% end -%><br />
+		</p>
+
+		<h1 class="ast-title">Admins:</h1>
+		<p class="ast-text">
+			<% @admins.each do |admin| %>
+			<%= admin.email %><br />
+			<% end %>
+		</p>
+	</div>
+</div>

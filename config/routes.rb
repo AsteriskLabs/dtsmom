@@ -1,7 +1,7 @@
 Dtsmom::Application.routes.draw do
-  resources :updates
+  #resources :updates
 
-  resources :orders
+  #resources :orders
 
   devise_for :clients
 
@@ -12,9 +12,14 @@ Dtsmom::Application.routes.draw do
   match '/dtsadmin/client/:id' => 'dtsadmin#listclient', :as => :dtsadmin_client, :via => "get"
   match '/dtsadmin/client/:clientid/addorder' => 'dtsadmin#addorder', :via => "post", :as => :dtsadmin_addorder
   match '/dtsadmin/client/:clientid/delorder' => 'dtsadmin#delorder', :via => "post", :as => :dtsadmin_delorder
+  match '/dtsadmin/client/:clientid/updateorder' => 'dtsadmin#updateorder', :via => "post", :as => :dtsadmin_updateorder
+  match '/dtsadmin/password' => 'dtsadmin#changepwdview', :via => "get", :as => :dtsadmin_password_view
+  match '/dtsadmin/password' => 'dtsadmin#changepwd', :via => "post", :as => :dtsadmin_password_change
 
   root :to => 'home#index'
 
+  match '/password' => 'home#changepwdview', :via => "get", :as => :client_password_view
+  match '/password' => 'home#changepwd', :via => "post", :as => :client_password_change
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

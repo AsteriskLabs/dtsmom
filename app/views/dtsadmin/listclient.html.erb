@@ -1,23 +1,35 @@
-<%= link_to("Back", :dtsadmin) %><br />
+<%= render "unibar" %>
 
-Client: <%= @client.email %><br />
+<div class="ast-main-content">
+	<div class="limiter">
+		<%= link_to("Back", :dtsadmin) %><br />
 
-<br />Orders:<br />
-<% @orders.each do |order| %>
-Title: <%= order.title %><br />
-Description: <%= order.description %><br />
-Status: <%= order.status %><br />
-<%= form_tag(:controller => :dtsadmin, :action => :delorder, :clientid => @client.id) do -%>
-<%= hidden_field_tag('id',order.id) %>
-<%= submit_tag('Delete Order') %>
-<% end -%>
-<br />
-<% end %>
+		<h1 class="ast-title">Client: <%= @client.email %></h1>
 
-<br />Add Order:<br />
-<%= form_tag(:controller => :dtsadmin, :action => :addorder, :clientid => @client.id) do -%>
-<%= text_field_tag 'title' %><br />
-<%= text_field_tag 'description' %><br />
-<%= text_field_tag 'status' %><br />
-<%= submit_tag 'Add Order' %>
-<% end -%>
+		<p class="ast-text">
+			<br />Orders:<br />
+			<% @orders.each do |order| %>
+			<%= form_tag(:controller => :dtsadmin, :action => :updateorder, :clientid => @client.id) do -%>
+			Title: <%= text_field_tag('title',order.title) %><br />
+			Description: <%= text_field_tag('description',order.description) %><br />
+			Status: <%= text_field_tag('status',order.status) %><br />
+			<%= hidden_field_tag('id',order.id) %>
+			<%= submit_tag('Update Order') %><br />
+			<% end -%>
+			<%= form_tag(:controller => :dtsadmin, :action => :delorder, :clientid => @client.id) do -%>
+			<%= hidden_field_tag('id',order.id) %>
+			<%= submit_tag('Delete Order') %>
+			<% end -%>
+			<br />
+			<% end %>
+
+			<br />Add Order:<br />
+			<%= form_tag(:controller => :dtsadmin, :action => :addorder, :clientid => @client.id) do -%>
+			<%= text_field_tag 'title' %><br />
+			<%= text_field_tag 'description' %><br />
+			<%= text_field_tag 'status' %><br />
+			<%= submit_tag 'Add Order' %>
+			<% end -%>
+		</p>
+	</div>
+</div>

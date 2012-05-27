@@ -1,0 +1,18 @@
+<%= render "unibar" %>
+
+<div class="ast-main-content">
+	<div class="limiter">
+		<h1 class="ast-title">Orders:</h1>
+
+		<p class="ast-text">
+			<% @orders.each do |order| %>
+			<table>
+			<tr><td>Title:</td><td><%= order.title %></td></tr>
+			<tr><td>Description:</td><td><%= order.description %></td></tr>
+			<tr><td>Status:</td><td><%= order.status %></td></tr>
+			<tr><td>Last updated:</td><td><%= order.updated_at %></td></tr>
+			</table><br /><br />
+			<% end %>
+		</p>
+	</div>
+</div>	

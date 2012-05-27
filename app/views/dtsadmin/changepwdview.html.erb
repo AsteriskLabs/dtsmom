@@ -1,0 +1,9 @@
+<%= render "unibar" %>
+
+<%= link_to("Back", :dtsadmin) %><br />
+
+<%= form_tag(:controller => :dtsadmin, :action => :changepwd) do -%>
+Password: <%= password_field_tag 'password' %><br />
+Confirm Password: <%= password_field_tag 'password_confirmation' %><br />
+<%= submit_tag 'Update Password' %>
+<% end -%>

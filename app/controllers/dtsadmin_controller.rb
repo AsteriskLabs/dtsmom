@@ -11,10 +11,16 @@ class DtsadminController < ApplicationController
 	end
 
 	def addclient
-
 		Client.create!(:email => params[:email], :password => params[:password], :password_confirmation => params[:password_confirmation])
-
 		redirect_to :root
+	end
+
+	def changepwdview
+	end
+
+	def changepwd
+		Admin.find(current_admin.id).update_attributes(:password => params[:password], :password_confirmation => params[:password_confirmation])
+		redirect_to(:controller => :dtsadmin, :action => :index)
 	end
 
 	def listclient
@@ -31,4 +37,10 @@ class DtsadminController < ApplicationController
 		Client.find(params[:clientid]).orders.find(params[:id]).destroy
 		redirect_to(:controller => :dtsadmin, :action => :listclient, :id => params[:clientid])
 	end
+
+	def updateorder
+		Client.find(params[:clientid]).orders.find(params[:id]).update_attributes(:title => params[:title], :description => params[:description], :status => params[:status])
+		redirect_to(:controller => :dtsadmin, :action => :listclient, :id => params[:clientid])
+	end
+
 end

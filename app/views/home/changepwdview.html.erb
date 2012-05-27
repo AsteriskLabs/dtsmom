@@ -1,0 +1,15 @@
+<%= render "unibar" %>
+
+<div class="ast-main-content">
+	<div class="limiter">
+		<%= link_to("Back", :root) %><br /><br />
+
+		<%= form_tag(:controller => :home, :action => :changepwd) do -%>
+		<table>
+		<tr><td>Password:</td><td><%= password_field_tag 'password' %></td></tr>
+		<tr><td>Confirm Password:</td><td><%= password_field_tag 'password_confirmation' %></td></tr>
+		</table><br />
+		<%= submit_tag 'Update Password' %>
+		<% end -%>
+	</div>
+</div>
