@@ -25,9 +25,9 @@
 
 			<br />Add Order:<br />
 			<%= form_tag(:controller => :dtsadmin, :action => :addorder, :clientid => @client.id) do -%>
-			<%= text_field_tag 'title' %><br />
-			<%= text_field_tag 'description' %><br />
-			<%= text_field_tag 'status' %><br />
+			Title: <%= text_field_tag 'title' %><br />
+			Description: <%= text_field_tag 'description' %><br />
+			Status: <%= text_field_tag 'status' %><br />
 			<%= submit_tag 'Add Order' %>
 			<% end -%>
 		</p>
