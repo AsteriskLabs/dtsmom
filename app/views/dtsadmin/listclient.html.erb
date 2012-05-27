@@ -1,0 +1,23 @@
+<%= link_to("Back", :dtsadmin) %><br />
+
+Client: <%= @client.email %><br />
+
+<br />Orders:<br />
+<% @orders.each do |order| %>
+Title: <%= order.title %><br />
+Description: <%= order.description %><br />
+Status: <%= order.status %><br />
+<%= form_tag(:controller => :dtsadmin, :action => :delorder, :clientid => @client.id) do -%>
+<%= hidden_field_tag('id',order.id) %>
+<%= submit_tag('Delete Order') %>
+<% end -%>
+<br />
+<% end %>
+
+<br />Add Order:<br />
+<%= form_tag(:controller => :dtsadmin, :action => :addorder, :clientid => @client.id) do -%>
+<%= text_field_tag 'title' %><br />
+<%= text_field_tag 'description' %><br />
+<%= text_field_tag 'status' %><br />
+<%= submit_tag 'Add Order' %>
+<% end -%>
