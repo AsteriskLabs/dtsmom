@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120527074815) do
+ActiveRecord::Schema.define(:version => 20120528122308) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "",  :null => false
@@ -48,19 +48,31 @@ ActiveRecord::Schema.define(:version => 20120527074815) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "name"
   end
 
   add_index "clients", ["email"], :name => "index_clients_on_email", :unique => true
   add_index "clients", ["reset_password_token"], :name => "index_clients_on_reset_password_token", :unique => true
 
+  create_table "items", :force => true do |t|
+    t.string   "status"
+    t.string   "description"
+    t.integer  "order_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "orders", :force => true do |t|
     t.string   "title"
-    t.string   "status"
     t.text     "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.integer  "client_id"
     t.integer  "admin_id"
+  end
+
+  create_table "statuses", :force => true do |t|
+    t.string "status"
   end
 
   create_table "updates", :force => true do |t|

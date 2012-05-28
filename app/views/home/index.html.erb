@@ -1,16 +1,34 @@
 <%= render "unibar" %>
 
+<script>
+$(document).ready(function() {
+	JTable.Setup();
+});
+</script>
+
 <div class="ast-main-content">
 	<div class="limiter">
 		<h1 class="ast-title">Orders:</h1>
 
 		<p class="ast-text">
 			<% @orders.each do |order| %>
-			<table>
+			<table class="jtable">
+			<tbody>
 			<tr><td>Title:</td><td><%= order.title %></td></tr>
 			<tr><td>Description:</td><td><%= order.description %></td></tr>
-			<tr><td>Status:</td><td><%= order.status %></td></tr>
-			<tr><td>Last updated:</td><td><%= order.updated_at %></td></tr>
+			<tr><td>Last updated:</td><td><%= order.updated_at.strftime('%Y-%m-%d %H:%M') %></td></tr>
+			<tr><td colspan="2">
+				<table>
+					<thead>
+						<tr><td>Item</td><td>Status</td><td>Updated</td></tr>
+					</thead>
+				<tbody>
+				<% @items[order.id].each do |item| %>
+				<tr><td style="font-weight: normal"><%= item.description %></td><td style="font-weight: normal"><%= item.status %></td><td style="font-weight: normal"><%= item.updated_at.strftime('%Y-%m-%d %H:%M') %></td></tr>
+				<% end %>
+				</tbody>
+				</table>
+			</tbody>
 			</table><br /><br />
 			<% end %>
 		</p>

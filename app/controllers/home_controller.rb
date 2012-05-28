@@ -1,7 +1,12 @@
 class HomeController < ApplicationController
 	before_filter :custom_auth_check
 	def index
-		@orders = Client.find(current_client.id).orders
+		@orders = Client.find(current_client.id).orders.sort_by {|order| order[:updated_at]}.reverse
+		@items = {}
+		@orders.each do |order|
+			@items[order.id] = order.items.sort_by {|item| item[:updated_at]}.reverse
+		end
+
 	end
 
 	def changepwdview

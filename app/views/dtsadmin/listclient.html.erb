@@ -1,33 +1,69 @@
 <%= render "unibar" %>
 
+<script>
+$(document).ready(function() {
+	JTable.Setup();
+});
+</script>
+
 <div class="ast-main-content">
 	<div class="limiter">
 		<%= link_to("Back", :dtsadmin) %><br />
 
-		<h1 class="ast-title">Client: <%= @client.email %></h1>
+		<h1 class="ast-title">Client: <%= @client.name %></h1>
 
 		<p class="ast-text">
-			<br />Orders:<br />
+			Contact email: <%= @client.email %><br /><br />
 			<% @orders.each do |order| %>
+			<table class="jtable">
 			<%= form_tag(:controller => :dtsadmin, :action => :updateorder, :clientid => @client.id) do -%>
-			Title: <%= text_field_tag('title',order.title) %><br />
-			Description: <%= text_field_tag('description',order.description) %><br />
-			Status: <%= text_field_tag('status',order.status) %><br />
-			<%= hidden_field_tag('id',order.id) %>
-			<%= submit_tag('Update Order') %><br />
-			<% end -%>
-			<%= form_tag(:controller => :dtsadmin, :action => :delorder, :clientid => @client.id) do -%>
-			<%= hidden_field_tag('id',order.id) %>
-			<%= submit_tag('Delete Order') %>
-			<% end -%>
+			<tbody>
+			<tr><td>Order Title:</td><td><%= text_field_tag('title',order.title,:size => 100) %></td></tr>
+			<tr><td>Order Description:</td><td><%= text_field_tag('description',order.description,:size => 100) %></td></tr>
+			<tr><td colspan="2"><%= hidden_field_tag('id',order.id) %><%= submit_tag('Update Order Name and Description') %><% end -%></td></tr>
+			<tr><td colspan="2">
+				Items:<br />
+				<table class="jtable">
+					<thead>
+						<tr><td>Description</td><td>Status</td><td>Modify</td></tr>
+					</thead>
+					<tbody>
+					<% @items[order.id].each do |item| %>
+					<%= form_tag(:controller => :dtsadmin, :action => :updateitem, :clientid => @client.id, :orderid => order.id) do -%>
+					<%= hidden_field_tag('id',item.id) %>
+					<tr><td><%= text_field_tag('description',item.description) %></td><td><%= select_tag('status', options_from_collection_for_select(@statuses, "status", "status", item.status)) %></td><td><%= submit_tag("Update Item") %><% end -%> <%= form_tag(:controller => :dtsadmin, :action => :delitem, :clientid => @client.id, :orderid => order.id) do -%><%= hidden_field_tag('id',item.id) %><%= submit_tag("Delete Item") %><% end -%></td></tr>
+					<% end %>
+					</tbody>
+				</table><br />
+				Add Item:<br />
+				<%= form_tag(:controller => :dtsadmin, :action => :additem, :clientid => @client.id, :orderid => order.id) do -%>
+				<table>
+					<tr><td>Description: </td><td><%= text_field_tag('description',nil,:size => 80) %></td></tr>
+					<tr><td>Status: </td><td><%= select_tag('status', options_from_collection_for_select(@statuses, "status", "status")) %></td></tr>
+				</table><br />
+				<%= submit_tag("Add Item") %>
+				<% end -%>
+			</td></tr>
+			<tr><td colspan="2">
+				<%= form_tag(:controller => :dtsadmin, :action => :delorder, :clientid => @client.id) do -%>
+				<%= hidden_field_tag('id',order.id) %>
+				<%= submit_tag('Delete Entire Order') %>
+				<% end -%>
+			</td></tr>
+			</tbody>
+			</table>
+			
+			<br />
+
 			<br />
 			<% end %>
 
 			<br />Add Order:<br />
 			<%= form_tag(:controller => :dtsadmin, :action => :addorder, :clientid => @client.id) do -%>
-			Title: <%= text_field_tag 'title' %><br />
-			Description: <%= text_field_tag 'description' %><br />
-			Status: <%= text_field_tag 'status' %><br />
+			<table>
+			<tr><td>Title:</td><td><%= text_field_tag('title',nil,:size => 100) %></td></tr>
+			<tr><td>Description:</td><td><%= text_field_tag('description',nil,:size => 100) %></td></tr>
+			</table>
 			<%= submit_tag 'Add Order' %>
 			<% end -%>
 		</p>

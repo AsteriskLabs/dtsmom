@@ -13,6 +13,9 @@ Dtsmom::Application.routes.draw do
   match '/dtsadmin/client/:clientid/addorder' => 'dtsadmin#addorder', :via => "post", :as => :dtsadmin_addorder
   match '/dtsadmin/client/:clientid/delorder' => 'dtsadmin#delorder', :via => "post", :as => :dtsadmin_delorder
   match '/dtsadmin/client/:clientid/updateorder' => 'dtsadmin#updateorder', :via => "post", :as => :dtsadmin_updateorder
+  match '/dtsadmin/client/:clientid/:orderid/additem' => 'dtsadmin#additem', :via => "post", :as => :dtsadmin_additem
+  match '/dtsadmin/client/:clientid/:orderid/updateitem' => 'dtsadmin#updateitem', :via => "post", :as => :dtsadmin_updateitem
+  match '/dtsadmin/client/:clientid/:orderid/delitem' => 'dtsadmin#delitem', :via => "post", :as => :dtsadmin_delitem
   match '/dtsadmin/password' => 'dtsadmin#changepwdview', :via => "get", :as => :dtsadmin_password_view
   match '/dtsadmin/password' => 'dtsadmin#changepwd', :via => "post", :as => :dtsadmin_password_change
 

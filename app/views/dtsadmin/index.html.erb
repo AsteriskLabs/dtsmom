@@ -6,14 +6,17 @@
 		<h1 class="ast-title">Clients:</h1>
 		<p class="ast-text">
 			<% @clients.each do |client| %>
-			<%= link_to(client.email, :controller => :dtsadmin, :action => :listclient, :id => client.id) %> (<%= @clientcounts[client.id] %>)<br />
+			<%= link_to(client.name, :controller => :dtsadmin, :action => :listclient, :id => client.id) %> (# of orders: <%= @clientcounts[client.id] %>)<br />
 			<% end %>
 
 			<br />Add a new client:<br />
 			<%= form_tag(:dtsadmin_addclient) do -%>
-			Email: <%= text_field_tag 'email' %><br />
-			Password: <%= password_field_tag 'password' %><br />
-			Confirm Password: <%= password_field_tag 'password_confirmation' %><br />
+			<table>
+			<tr><td>Name:</td><td><%= text_field_tag 'name' %></td></tr>
+			<tr><td>Contact Email:</td><td><%= text_field_tag 'email' %></td></tr>
+			<tr><td>Password:</td><td><%= password_field_tag 'password' %> * They can reset this themselves later.</td></tr>
+			<tr><td>Confirm Password:</td><td><%= password_field_tag 'password_confirmation' %></td></tr>
+			</table>
 			<%= submit_tag 'Add Client' %>
 			<% end -%><br />
 		</p>
