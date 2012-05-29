@@ -20,6 +20,8 @@ $(document).ready(function() {
 			<tbody>
 			<tr><td>Order Title:</td><td><%= text_field_tag('title',order.title,:size => 100) %></td></tr>
 			<tr><td>Order Description:</td><td><%= text_field_tag('description',order.description,:size => 100) %></td></tr>
+			<tr><td>Order Updated:</td><td><%= order.updated_at %></td></tr>
+			<tr><td>Order Created By:</td><td><%= order.admin.nil? ? "" : order.admin.email %></td></tr>
 			<tr><td colspan="2"><%= hidden_field_tag('id',order.id) %><%= submit_tag('Update Order Name and Description') %><% end -%></td></tr>
 			<tr><td colspan="2">
 				Items:<br />

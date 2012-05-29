@@ -4,6 +4,7 @@
 		<div id="ast-ub-subtitle">Delivery Tracking System</div>
 		<div id="ast-ub-options">
 			<ul>
+				<li><%= link_to('Configure 2FA', :admin_displayqr) %></li>
 				<li><%= link_to('Change your password', :dtsadmin_password_change) %></li>
 				<li><%= link_to('Logout', :destroy_admin_session, :method => :delete) %></li>
 			</ul>

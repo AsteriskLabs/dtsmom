@@ -34,7 +34,9 @@ class DtsadminController < ApplicationController
 	end
 
 	def addorder
-		Client.find(params[:clientid]).orders.create(:title => params[:title], :description => params[:description])
+		neworder = Client.find(params[:clientid]).orders.create(:title => params[:title], :description => params[:description])
+		neworder.admin = current_admin
+		neworder.save
 		redirect_to(:controller => :dtsadmin, :action => :listclient, :id => params[:clientid])
 	end
 
