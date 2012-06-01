@@ -24,9 +24,9 @@ class DtsadminController < ApplicationController
 	end
 
 	def listclient
-		@client = Client.select("id,email,name").find(params[:id])
+		@client = Client.select("id,email,name").find(params[:id].to_i)
 		@items = {}
-		@orders = Client.find(params[:id]).orders
+		@orders = Client.find(params[:id].to_i).orders
 		@orders.each do |order|
 			@items[order.id] = order.items
 		end
@@ -34,37 +34,37 @@ class DtsadminController < ApplicationController
 	end
 
 	def addorder
-		neworder = Client.find(params[:clientid]).orders.create(:title => params[:title], :description => params[:description])
+		neworder = Client.find(params[:clientid].to_i).orders.create(:title => params[:title], :description => params[:description])
 		neworder.admin = current_admin
 		neworder.save
-		redirect_to(:controller => :dtsadmin, :action => :listclient, :id => params[:clientid])
+		redirect_to(:controller => :dtsadmin, :action => :listclient, :id => params[:clientid].to_i)
 	end
 
 	def delorder
-		Client.find(params[:clientid]).orders.find(params[:id]).destroy
-		redirect_to(:controller => :dtsadmin, :action => :listclient, :id => params[:clientid])
+		Client.find(params[:clientid].to_i).orders.find(params[:id]).destroy
+		redirect_to(:controller => :dtsadmin, :action => :listclient, :id => params[:clientid].to_i)
 	end
 
 	def updateorder
-		Client.find(params[:clientid]).orders.find(params[:id]).update_attributes(:title => params[:title], :description => params[:description])
-		redirect_to(:controller => :dtsadmin, :action => :listclient, :id => params[:clientid])
+		Client.find(params[:clientid].to_i).orders.find(params[:id].to_i).update_attributes(:title => params[:title], :description => params[:description])
+		redirect_to(:controller => :dtsadmin, :action => :listclient, :id => params[:clientid].to_i)
 	end
 
 	def additem
-		Client.find(params[:clientid]).orders.find(params[:orderid]).items.create(:description => params[:description],:status => params[:status])
-		Client.find(params[:clientid]).orders.find(params[:orderid]).touch
-		redirect_to(:controller => :dtsadmin, :action => :listclient, :id => params[:clientid])
+		Client.find(params[:clientid].to_i).orders.find(params[:orderid].to_i).items.create(:description => params[:description],:status => params[:status])
+		Client.find(params[:clientid].to_i).orders.find(params[:orderid].to_i).touch
+		redirect_to(:controller => :dtsadmin, :action => :listclient, :id => params[:clientid].to_i)
 	end
 
 	def updateitem
-		Client.find(params[:clientid]).orders.find(params[:orderid]).items.find(params[:id]).update_attributes(:description => params[:description], :status => params[:status])
-		Client.find(params[:clientid]).orders.find(params[:orderid]).touch
-		redirect_to(:controller => :dtsadmin, :action => :listclient, :id => params[:clientid])
+		Client.find(params[:clientid].to_i).orders.find(params[:orderid].to_i).items.find(params[:id].to_i).update_attributes(:description => params[:description], :status => params[:status])
+		Client.find(params[:clientid].to_i).orders.find(params[:orderid].to_i).touch
+		redirect_to(:controller => :dtsadmin, :action => :listclient, :id => params[:clientid].to_i)
 	end
 
 	def delitem
-		Client.find(params[:clientid]).orders.find(params[:orderid]).items.find(params[:id]).destroy
-		Client.find(params[:clientid]).orders.find(params[:orderid]).touch
-		redirect_to(:controller => :dtsadmin, :action => :listclient, :id => params[:clientid])
+		Client.find(params[:clientid].to_i).orders.find(params[:orderid].to_i).items.find(params[:id].to_i).destroy
+		Client.find(params[:clientid].to_i).orders.find(params[:orderid].to_i).touch
+		redirect_to(:controller => :dtsadmin, :action => :listclient, :id => params[:clientid].to_i)
 	end	
 end
