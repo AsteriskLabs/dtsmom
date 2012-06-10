@@ -13,6 +13,7 @@ group :production do
 end
 gem 'thin'
 gem 'devise'
+gem 'asset_sync'
 gem 'devise_google_authenticator', '0.3.3'
 
 
