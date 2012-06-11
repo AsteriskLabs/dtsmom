@@ -23,6 +23,7 @@ Dtsmom::Application.routes.draw do
 
   match '/password' => 'home#changepwdview', :via => "get", :as => :client_password_view
   match '/password' => 'home#changepwd', :via => "post", :as => :client_password_change
+  match '/email_updates' => 'home#changeemailstatus', :via => "post", :as => :email_updates
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

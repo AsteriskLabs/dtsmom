@@ -3,6 +3,10 @@
 <script>
 $(document).ready(function() {
 	JTable.Setup();
+
+	$('.email_stat').on("change", function() {
+		$(this).parent().submit();
+	});
 });
 </script>
 
@@ -31,6 +35,12 @@ $(document).ready(function() {
 			</tbody>
 			</table><br /><br />
 			<% end %>
+		</p>
+		<p class="ast-text">
+			<%= form_tag(:controller => :home, :action => :changeemailstatus) do -%>
+			Would you like to receive email updates on changes to orders? <%= check_box_tag('status','yes',@email_updates,:class => "email_stat") %>
+			<% end -%>
+
 		</p>
 	</div>
 </div>	
