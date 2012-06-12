@@ -20,7 +20,6 @@ class HomeController < ApplicationController
 	def changeemailstatus
 		newval = nil
 		newval = params[:status] == "yes" ? true : false
-		puts "HAHAHAHA: " + newval.to_s
 		Client.find(current_client.id).update_attributes(:email_updates => newval)
 		redirect_to :root
 	end
