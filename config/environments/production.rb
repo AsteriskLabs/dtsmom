@@ -68,5 +68,7 @@ Dtsmom::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  config.action_mailer.default_url_options = { :protocol => 'https://', :host => 'ast-dts.herokuapp.com' }
+  # Modify the below for your environment.
+  #  I'm using environment variables
+  config.action_mailer.default_url_options = { :protocol => ENV['MAILER_URL_PROTO'], :host => ENV['MAILER_URL_HOST'] }
 end
